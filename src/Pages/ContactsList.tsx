@@ -13,7 +13,8 @@ function ContactsList(props:ContactsListProps) {
     <div>{props.contactList.map((pers)=> {
         return (
             <div>
-                {pers.name} {pers.surname} {pers.number} <Button onClick={()=>props.deleteContact(pers.number)} >Del</Button>
+                {pers.name} {pers.surname} {pers.number} <Button onClick={()=>props.deleteContact(pers.number)} >Delete Contact</Button>
+                <Button>Update Contact</Button>
             </div>
         )
     })}</div>
