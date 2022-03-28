@@ -57,7 +57,7 @@ function App() {
     setContactsList(newList);
   }
 
-  //ne osvjezava mi listu odmah vec nakon neke druge promjene npr brisanja 
+  //nisam siguran u izvedbu 
   function setFavourite(number:string){
     contactList.map((contact:any)=>{
       if(number === contact.number){
