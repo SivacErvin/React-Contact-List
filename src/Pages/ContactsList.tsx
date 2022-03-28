@@ -1,6 +1,9 @@
-import { Button } from '@mui/material'
+import { Button, IconButton } from '@mui/material'
 import React from 'react'
 import { Persona } from '../App'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface ContactsListProps {
     contactList: Persona[]
@@ -13,12 +16,17 @@ function ContactsList(props:ContactsListProps) {
     <div>{props.contactList.map((pers)=> {
         return (
             <div>
-                {pers.name} {pers.surname} {pers.number} <Button onClick={()=>props.deleteContact(pers.number)} >Delete Contact</Button>
+                <IconButton>
+                  <FavoriteBorderIcon/>
+                  </IconButton>
+                  {pers.name} {pers.surname} {pers.number} 
+                  <Button onClick={()=>props.deleteContact(pers.number)} >
+                    <DeleteIcon/>
+                    </Button>
                 <Button>Update Contact</Button>
             </div>
         )
     })}</div>
   )
 }
-//onClick={props.deleteContact(pers.number)}
 export default ContactsList

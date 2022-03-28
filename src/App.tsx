@@ -4,6 +4,7 @@ import React,{ useState } from 'react';
 import './App.scss';
 import ContactsList from './Pages/ContactsList';
 import { Input } from '@mui/material';
+import FreeSolo from './Pages/Search';
 
 export interface Persona{
   name: string
@@ -61,6 +62,7 @@ function App() {
          Ovo će biti vrh stranice.
       </h1>
       <div>
+        <FreeSolo contactList={contactList} />
         <Input name="name" value={person.name } placeholder='Name' onChange={handleInput}/>
         <Input name="surname" value={person.surname } placeholder='Surname' onChange={handleInput}/>
         <Input name="number" value={person.number } placeholder='Number' onChange={handleInput}/>
