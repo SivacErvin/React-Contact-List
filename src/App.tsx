@@ -10,6 +10,7 @@ export interface Persona{
   name: string
   surname: string
   number: string
+  favourite: boolean
 }
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
   
   // const [contactList, setContactsList] = useState(initialContactList);
   const [contactList, setContactsList] = useState(JSON.parse(localStorage.getItem("Contacts") || '{}'));
-  const [person, setPerson] = useState<Persona>({name:"", surname:"", number: ""});
+  const [person, setPerson] = useState<Persona>({name:"", surname:"", number: "", favourite:false});
 
   React.useEffect(() => {
     localStorage.setItem("Contacts", JSON.stringify(contactList));
@@ -40,7 +41,7 @@ function App() {
     //ne znam bas koliko je ovo dobro ali radi...-> ne dodaje prazne kontakte
     if(person.name !== "" && person.surname!=="" && person.number!==""){
       setContactsList([...contactList, person]);
-      setPerson({name:"", surname:"", number: ""}); 
+      setPerson({name:"", surname:"", number: "", favourite:false}); 
     }    
   }
 
@@ -56,6 +57,20 @@ function App() {
     setContactsList(newList);
   }
 
+  //ne osvjezava mi listu odmah vec nakon neke druge promjene npr brisanja 
+  function setFavourite(number:string){
+    contactList.map((contact:any)=>{
+      if(number === contact.number){
+        if(contact.favourite === true){
+          contact.favourite = false;
+        }else
+        contact.favourite = true;
+            }
+    });
+    const newList=contactList.filter((contact:any)=>(true))
+    setContactsList(newList);
+}
+
   return (
     <div className="App">
       <h1 className='Top'>
@@ -70,7 +85,7 @@ function App() {
           Create contact 
         </Button>
       </div>
-      <ContactsList contactList={contactList} deleteContact={deleteContact} />
+      <ContactsList contactList={contactList} deleteContact={deleteContact} setFavourite={setFavourite} />
     </div>
   );
 } 
