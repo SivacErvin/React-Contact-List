@@ -57,18 +57,19 @@ function App() {
     setContactsList(newList);
   }
 
-  //nisam siguran u izvedbu 
-  function setFavourite(number:string){
-    contactList.map((contact:any)=>{
-      if(number === contact.number){
-        if(contact.favourite === true){
-          contact.favourite = false;
-        }else
-        contact.favourite = true;
-            }
-    });
-    const newList=contactList.filter((contact:any)=>(true))
-    setContactsList(newList);
+  //nisam siguran u izvedbu, ako se moze poslat osoba i onda da se ta osoba nade u listu i zamjeni samo flag i update to bi bilo top, pokusavao sam nisam nasao rjesenje 
+  
+function setFavourite(number:string){
+  contactList.map((contact:any)=>{
+    if(number === contact.number){
+      if(contact.favourite === true){
+        contact.favourite = false;
+      }else
+      contact.favourite = true;
+          }
+  });
+  const newList=contactList.filter((contact:any)=>(true))
+  setContactsList(newList);
 }
 
   return (
@@ -91,3 +92,17 @@ function App() {
 } 
 
 export default App;
+
+
+// function setFavourite(number:string){
+//   contactList.map((contact:any)=>{
+//     if(number === contact.number){
+//       if(contact.favourite === true){
+//         contact.favourite = false;
+//       }else
+//       contact.favourite = true;
+//           }
+//   });
+//   const newList=contactList.filter((contact:any)=>(true))
+//   setContactsList(newList);
+// }

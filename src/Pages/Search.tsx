@@ -9,6 +9,8 @@ interface ContactsListProps {
   contactList: Persona[]
 }
 
+//onSubmit u autocompleteu za prelazak na info page 
+
 export default function FreeSolo(props:ContactsListProps) {
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
@@ -17,10 +19,11 @@ export default function FreeSolo(props:ContactsListProps) {
         id="free-solo-2-demo"
         disableClearable
         options={props.contactList.map((pers)=> [pers.name, pers.surname])}
+        
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Search input"
+            label="Search"
             InputProps={{
               ...params.InputProps,
               type: 'search',

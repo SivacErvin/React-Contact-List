@@ -4,6 +4,7 @@ import { Persona } from '../App'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface ContactsListProps {
     contactList: Persona[]
@@ -18,8 +19,10 @@ function ContactsList(props:ContactsListProps) {
         return (
             <div>
               {pers.favourite ? <IconButton onClick={()=>props.setFavourite(pers.number)}>  <FavoriteIcon/> </IconButton> : <IconButton onClick={()=>props.setFavourite(pers.number)}> <FavoriteBorderIcon/> </IconButton>}
-              {/* <IconButton> <FavoriteBorderIcon/> </IconButton> */}
                   {pers.name} {pers.surname} {pers.number} 
+                  <Button>
+                    <InfoIcon/>
+                  </Button>
                   <Button onClick={()=>props.deleteContact(pers.number)} >
                     <DeleteIcon/>
                     </Button>
@@ -31,17 +34,3 @@ function ContactsList(props:ContactsListProps) {
   )
 }
 export default ContactsList
-
-
-
-// if(props.favourite === true){
-//   <IconButton>
-//    <FavoriteIcon/>
-//     </IconButton>
-      
-//     } else {
-//       <IconButton>
-//       <FavoriteIcon/>
-//        </IconButton>n/>
-//     }
-  
