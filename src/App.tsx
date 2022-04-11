@@ -1,10 +1,13 @@
 /* eslint-disable no-octal */
 import { Button } from '@mui/material';
+import { Input } from '@mui/material';
 import React,{ useState } from 'react';
 import './App.scss';
 import ContactsList from './Pages/ContactsList';
-import { Input } from '@mui/material';
 import FreeSolo from './Pages/Search';
+import Favourites from './Pages/Favourites';
+import Navigation from './Pages/Navigation';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export interface Persona{
   name: string
@@ -15,21 +18,6 @@ export interface Persona{
 
 function App() {
 
-  // const persona1:Persona = {name:"Ivo", surname:"Ivić", number: "098538907"};
-  // const persona2:Persona = {name:"Andro", surname:"Andrić", number: "098538909"};
-  // const initialContactList:Persona[] = [persona1,persona2];
-
-  // console.log("ovo je log prije");
-  // console.log(localStorage.getItem("Contacts"));
-  // console.log(typeof(localStorage.getItem("Contacts")));
-  // console.log("ovo je log poslije");
-
-  // const init  = JSON.parse(localStorage.getItem("Contacts") || '{}');
-  // console.log(init);
-  // console.log(typeof(init));
-
-  
-  // const [contactList, setContactsList] = useState(initialContactList);
   const [contactList, setContactsList] = useState(JSON.parse(localStorage.getItem("Contacts") || '{}'));
   const [person, setPerson] = useState<Persona>({name:"", surname:"", number: "", favourite:false});
 
@@ -49,7 +37,6 @@ function App() {
     const name = event.target.name;
     const value = event.target.value;
     setPerson(values => ({...values, [name]:value}));
-    //console.log(person);
   }
 
   function deleteContact(number:string){
@@ -73,18 +60,28 @@ function setFavourite(number:string){
 }
 
   return (
-    <div className="App">
-      <h1 className='Top'>
-         Ovo će biti vrh stranice.
-      </h1>
+    <div>
+     
+
+      <BrowserRouter>
+        <Routes>
+        <Route path="/" element={<Navigation />}>
+          {/* <Route index element={<App />} /> */}
+          <Route path="favourites" element={<Favourites />} />
+          <Route path="contactlist" element={<ContactsList contactList={contactList} deleteContact={deleteContact} setFavourite={setFavourite} />} />
+        </Route>
+        </Routes>
+      </BrowserRouter>
+
+
+
       <div>
+        
         <FreeSolo contactList={contactList} />
         <Input name="name" value={person.name } placeholder='Name' onChange={handleInput}/>
         <Input name="surname" value={person.surname } placeholder='Surname' onChange={handleInput}/>
         <Input name="number" value={person.number } placeholder='Number' onChange={handleInput}/>
-        <Button variant='outlined' onClick={add} >
-          Create contact 
-        </Button>
+        <Button variant='outlined' onClick={add} > Create contact </Button>
       </div>
       <ContactsList contactList={contactList} deleteContact={deleteContact} setFavourite={setFavourite} />
     </div>
@@ -92,17 +89,3 @@ function setFavourite(number:string){
 } 
 
 export default App;
-
-
-// function setFavourite(number:string){
-//   contactList.map((contact:any)=>{
-//     if(number === contact.number){
-//       if(contact.favourite === true){
-//         contact.favourite = false;
-//       }else
-//       contact.favourite = true;
-//           }
-//   });
-//   const newList=contactList.filter((contact:any)=>(true))
-//   setContactsList(newList);
-// }
